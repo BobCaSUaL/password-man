@@ -1,0 +1,23 @@
+{
+  "name": "password-man",
+  "version": "0.0.1",
+  "description": "A simple password manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BobCaSUaL/password-man.git"
+  },
+  "keywords": [
+    "password",
+    "manager"
+  ],
+  "author": "Roberto CASULA <casual4free@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BobCaSUaL/password-man/issues"
+  },
+  "homepage": "https://github.com/BobCaSUaL/password-man#readme"
+}
