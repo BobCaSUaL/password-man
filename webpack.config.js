@@ -1,17 +1,17 @@
-var webpack = require('webpack')
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
-var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
-var WebpackDevServer = require('webpack-dev-server')
-var path = require('path')
-var env = process.env.WEBPACK_ENV
+const webpack = require('webpack')
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
+const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
+const WebpackDevServer = require('webpack-dev-server')
+const path = require('path')
+const env = process.env.WEBPACK_ENV
 
-var appName = 'spa'
+const appName = 'spa'
 
-var host = '0.0.0.0'
-var port = '9001'
+const host = '0.0.0.0'
+const port = '9001'
 
-var outputFile = appName + '.js'
-var plugins = [
+const outputFile =  appName + (env === 'build' ? '.min.js' : '.js')
+const plugins = [
    new webpack.DefinePlugin({
       "global.GENTLY": false
    })
@@ -22,13 +22,11 @@ if (env === 'build') {
       minimize: true
    }))
    plugins.push(new OccurenceOrderPlugin())
-   outputFile = appName + '.min.js'
 } else {
    plugins.push(new webpack.HotModuleReplacementPlugin())
-   outputFile = appName + '.js'
 }
 
-var config = {
+const config = {
    context: __dirname + "/src",
    entry: [
       'webpack-dev-server/client?http://' + host + ':' + port,
@@ -48,7 +46,7 @@ var config = {
    module: {
       loaders: [{
          test: /\.jsx?$/,
-         loaders: ['react-hot-loader/webpack', 'babel-loader'],
+         loaders: ['babel-loader'],
          include: [
              path.join(__dirname, 'src'),
              path.join(__dirname, 'libs')
