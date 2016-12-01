@@ -22,13 +22,13 @@ const selected = ({...tree, selectedPath}) =>
          selectedPath: tree.selectedPath.slice(1)
       }) : tree
 
-const renderCategory = ({tree, path}, handle) => (
+const renderCategory = ({tree, path, deep}, handle) => (
    <Media.List>
       {tree.children.map(({...child, children}, index) => (
          <Media.ListItem key={index}
             onClickCapture={handle(select(path.concat(index)))}>
             <Media.Left>
-               <Glyphicon glyph={child.data.icon} />
+               <Glyphicon glyph={child.data.icon || 'asterisk'} />
             </Media.Left>
             <Media.Body>
                <Media.Heading>{child.data.name}</Media.Heading>
@@ -37,41 +37,36 @@ const renderCategory = ({tree, path}, handle) => (
                      type: child.type,
                      children
                   },
-                     path: path.concat(index)
-                  }, handle)
-               }
+                  path: path.concat(index),
+                  deep: deep - 1
+               }, handle)}
             </Media.Body>
             <Media.Right>
                <Glyphicon glyph="chevron-right" />
             </Media.Right>
          </Media.ListItem>
       ))}
-
-      {path.length <= 0 && (<pre>{inspect(tree)}</pre>)}
    </Media.List>
 )
 const renderEntry = ({tree, path}, handle) => (
    <Media key={path.slice(-1)}>
       <Media.Left>
-         <Glyphicon glyph={tree.data.icon} />
+         <Glyphicon glyph={tree.data.icon || 'asterisk'} />
       </Media.Left>
       <Media.Body>
          <Media.Heading>{tree.data.name}</Media.Heading>
       </Media.Body>
-      <Media.Right>
-         <Glyphicon glyph="chevron-right" />
-      </Media.Right>
    </Media>
 )
 
-const _render = ({tree, path}, handle) => do {
+const _render = ({tree, path, deep}, handle) => deep > 0 && do {
    tree.type === 'root' ?
-      renderCategory({tree, path}, handle) :
+      renderCategory({tree, path, deep}, handle) :
    tree.type === 'category' ?
-      renderCategory({tree, path}, handle) :
+      renderCategory({tree, path, deep}, handle) :
    tree.type === 'entry' ?
       renderEntry({tree, path}, handle) :
-   null
+   undefined
 }
 const render = ({props: {tree}}, handle) => (
    <div>
@@ -94,10 +89,13 @@ const render = ({props: {tree}}, handle) => (
       <Grid>
          {
             _render({
-               tree: selected(tree), path: tree.selectedPath
+               tree: selected(tree), path: tree.selectedPath,
+               deep: 1
             }, handle)
          }
       </Grid>
+
+      <pre>{inspect(select(tree))}</pre>
    </div>
 )
 
