@@ -3,7 +3,7 @@ A simple password manager
 
 TODO:
  - [x] login form
- - [ ] password list as a tree (internal are categories, leaf are password payload)
+ - [x] password list as a tree (internal are categories, leaf are password payload)
  - [ ] password should be shown also if required
  - [ ] tree JSON encription with aes.
  - [ ] possibility of choose the encription algoritm from "crypto-js"

@@ -1,6 +1,6 @@
 import React from 'react'
 import component from 'functional-react'
-import {Button, Glyphicon, Grid, Media, Navbar} from 'react-bootstrap'
+import {Button, Glyphicon, Grid, Media, Navbar, Table} from 'react-bootstrap'
 import {dispatch} from './reducer'
 
 const inspect = (obj) => require('util').inspect(obj, { depth: null })
@@ -44,13 +44,37 @@ const renderCategory = ({tree, path, deep}, handle) => (
       ))}
    </Media.List>
 )
-const renderEntry = ({tree, path}, handle) => (
+const renderEntry = ({tree: {data}, path}, handle) => (
    <Media key={path.slice(-1)}>
       <Media.Left>
-         <Glyphicon glyph={tree.data.icon || 'asterisk'} />
+         <Glyphicon glyph={data.icon || 'asterisk'} />
       </Media.Left>
       <Media.Body>
-         <Media.Heading>{tree.data.name}</Media.Heading>
+         <Media.Heading>{data.name}</Media.Heading>
+         <Table striped bordered condensed hover>
+          <tbody>
+            <tr>
+               <th>username:</th>
+               <td>{data.username}</td>
+            </tr>
+            <tr>
+               <th>password:</th>
+               <td>{data.password instanceof Array ? data.password[0].value : data.password}</td>
+            </tr>
+            <tr>
+               <th>link:</th>
+               <td>{data.link}</td>
+            </tr>
+            <tr>
+               <th>securityQuestion:</th>
+               <td>{data.securityQuestion}</td>
+            </tr>
+            <tr>
+               <th>securityAnswers:</th>
+               <td>{data.securityAnswers}</td>
+            </tr>
+          </tbody>
+        </Table>
       </Media.Body>
    </Media>
 )
@@ -65,7 +89,7 @@ const _render = ({tree, path, deep}, handle) => deep > 0 && do {
    undefined
 }
 const render = ({props: {tree}}, handle) => (
-   <div>
+   <Grid fluid={true}>
       <Navbar>
          <Navbar.Header>
             <Button bsStyle="primary" bsSize="large"
@@ -92,7 +116,7 @@ const render = ({props: {tree}}, handle) => (
       </Grid>
 
       <pre>{inspect(selected(tree))}</pre>
-   </div>
+   </Grid>
 )
 
 export default component('Tree', {render})
