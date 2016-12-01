@@ -16,11 +16,7 @@ const backPath = path => () => dispatch({
 
 
 const selected = ({...tree, selectedPath}) =>
-   selectedPath && selectedPath.length > 0 ?
-      selected({
-         ...tree.children[tree.selectedPath[0]],
-         selectedPath: tree.selectedPath.slice(1)
-      }) : tree
+   selectedPath.reduce((tree, path) => tree.children[path], tree)
 
 const renderCategory = ({tree, path, deep}, handle) => (
    <Media.List>
@@ -95,7 +91,7 @@ const render = ({props: {tree}}, handle) => (
          }
       </Grid>
 
-      <pre>{inspect(select(tree))}</pre>
+      <pre>{inspect(selected(tree))}</pre>
    </div>
 )
 
