@@ -51,30 +51,30 @@ const renderEntry = ({tree: {data}, path}, handle) => (
       </Media.Left>
       <Media.Body>
          <Media.Heading>{data.name}</Media.Heading>
-         <Table striped bordered condensed hover>
-          <tbody>
-            <tr>
-               <th>username:</th>
-               <td>{data.username}</td>
-            </tr>
-            <tr>
-               <th>password:</th>
-               <td>{data.password instanceof Array ? data.password[0].value : data.password}</td>
-            </tr>
-            <tr>
-               <th>link:</th>
-               <td>{data.link}</td>
-            </tr>
-            <tr>
-               <th>securityQuestion:</th>
-               <td>{data.securityQuestion}</td>
-            </tr>
-            <tr>
-               <th>securityAnswers:</th>
-               <td>{data.securityAnswers}</td>
-            </tr>
-          </tbody>
-        </Table>
+         <Table striped={true} bordered={true} condensed={true} hover={true}>
+            <tbody>
+               <tr>
+                  <th>username:</th>
+                  <td>{data.username}</td>
+               </tr>
+               <tr>
+                  <th>password:</th>
+                  <td>{data.password instanceof Array ? data.password[0].value : data.password}</td>
+               </tr>
+               <tr>
+                  <th>link:</th>
+                  <td>{data.link}</td>
+               </tr>
+               <tr>
+                  <th>securityQuestion:</th>
+                  <td>{data.securityQuestion}</td>
+               </tr>
+               <tr>
+                  <th>securityAnswers:</th>
+                  <td>{data.securityAnswers}</td>
+               </tr>
+            </tbody>
+         </Table>
       </Media.Body>
    </Media>
 )
