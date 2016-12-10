@@ -1,6 +1,6 @@
 import React from 'react'
 import component from 'functional-react'
-import {Button, Glyphicon, Grid, Media, Navbar, Table} from 'react-bootstrap'
+import {Button, Col, Glyphicon, Grid, Media, Navbar, Table} from 'react-bootstrap'
 import {dispatch} from './reducer'
 
 const inspect = (obj) => require('util').inspect(obj, { depth: null })
