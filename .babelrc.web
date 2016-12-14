@@ -4,7 +4,7 @@
          "functional-composition", {
                "name": "pipe",
                "as": "pipe",
-               "from": "ramda",
+               "from": "ramda"
          }
       ],
       "react-hot-loader/babel",
@@ -23,5 +23,5 @@
       "transform-flow-strip-types",
       "typecheck"
    ],
-   "presets": ["es2015", "react", "react-hmre", "stage-0"],
+   "presets": ["es2015", "react", "react-hmre", "stage-0"]
 }

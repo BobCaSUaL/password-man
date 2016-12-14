@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const fs = require('fs')
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin
 const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin
 const WebpackDevServer = require('webpack-dev-server')
@@ -46,7 +47,8 @@ const config = {
    module: {
       loaders: [{
          test: /\.jsx?$/,
-         loaders: ['babel-loader'],
+         loader: 'babel-loader',
+         query: JSON.parse(fs.readFileSync('./.babelrc.web')),
          include: [
              path.join(__dirname, 'src'),
              path.join(__dirname, 'libs')
